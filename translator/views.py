@@ -6,14 +6,23 @@ def index(request):
 def translate(request):
     if request.method == 'POST':
         text = request.POST.get('text', '')
-        src_lang = request.POST.get('src_lang', 'en')
-        tgt_lang = request.POST.get('tgt_lang', 'uz')
+        if not text:
+            return JsonResponse({'translation': ''})
+            
         try:
-            # Model server is not yet deployed, so this is a placeholder
-            # response = requests.post('http://model-server/translate', json={'text': text, 'src': src_lang, 'tgt': tgt_lang})
-            # translation = response.json().get('translation', '')
-            translation = f"Translated: {text}"
-        except Exception:
-            translation = "Error: Model server unreachable"
+            # Hugging Face Spaces endpoint
+            url = 'https://saparbayev-azizbek-rnn-translator-fra-en.hf.space/translate'
+            response = requests.post(url, json={'text': text}, timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                translation = data.get('translated', '')
+            else:
+                translation = f"Error: Model server returned status {response.status_code}"
+        except requests.exceptions.RequestException as e:
+            translation = f"Error: Model server unreachable ({str(e)})"
+        except Exception as e:
+            translation = f"Error: {str(e)}"
+            
         return JsonResponse({'translation': translation})
     return JsonResponse({'error': 'Invalid request'}, status=400)

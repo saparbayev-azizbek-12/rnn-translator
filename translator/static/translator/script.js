@@ -1,8 +1,9 @@
 function debounce(fn,ms){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),ms)}}
-const sourceArea=document.getElementById('source-text'),targetArea=document.getElementById('target-text'),charCount=document.getElementById('char-count');
+const sourceArea=document.getElementById('source-text'),targetArea=document.getElementById('target-text'),charCount=document.getElementById('char-count'),loader=document.getElementById('loader');
 const doTranslate=async()=>{
     const text=sourceArea.value.trim();
     if(!text){targetArea.value='';return}
+    loader.style.display='block';
     try{
         const response=await fetch('/translate/',{
             method:'POST',
@@ -12,6 +13,7 @@ const doTranslate=async()=>{
         const data=await response.json();
         targetArea.value=data.translation||'';
     }catch(e){targetArea.value='Error connecting to server'}
+    finally{loader.style.display='none'}
 }
 sourceArea.addEventListener('input',debounce(()=>{
     charCount.textContent=`${sourceArea.value.length}/5000`;

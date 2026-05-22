@@ -190,3 +190,54 @@ textarea::placeholder{
     font-size:0.85rem;
     background:var(--bg)
 }
+.loader {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(79, 70, 229, 0.1);
+    border-top: 3px solid var(--primary);
+    border-radius: 50%;
+    display: none;
+    animation: rotation 1s linear infinite;
+    margin-right: 5px;
+}
+@keyframes rotation {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+    .logo {
+        font-size: 1.1rem;
+    }
+    .nav-right {
+        gap: 0.5rem;
+    }
+    .model-info {
+        font-size: 0.75rem;
+    }
+    .main-container {
+        margin: 1rem auto;
+        padding: 0 0.8rem;
+    }
+    .translator-box {
+        grid-template-columns: 1fr;
+        border-radius: 1rem;
+    }
+    .panel {
+        padding: 1.25rem;
+        height: 250px;
+    }
+    .left-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    textarea {
+        font-size: 1.1rem;
+    }
+    .action-btn {
+        padding: 0.4rem;
+    }
+}
