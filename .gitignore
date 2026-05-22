@@ -1,0 +1,11 @@
+*__pycache__
+.venv
+.env
+
+*migrations
+*db.sqlite3
+
+uv.lock
+
+.python-version
+pyproject.toml
