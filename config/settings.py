@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9^bhn*d$d3!4s0o!6!)kpj4+jo_4+g3b!h_rccj#w33y#qip&w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rnntranslator.pythonanywhere.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['rnntranslator.pythonanywhere.com', 'localhost', '127.0.0.1', '.ngrok-free.app']
 
 
 # Application definition
